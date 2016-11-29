@@ -1,5 +1,5 @@
 import React, {PropTypes} from 'react'
-import { ScrollView, DeviceEventEmitter } from 'react-native'
+import { ScrollView, DeviceEventEmitter, Keyboard } from 'react-native'
 import StyleSheetPropType from 'react-native/Libraries/StyleSheet/StyleSheetPropType'
 import ViewStylePropTypes from 'react-native/Libraries/Components/View/ViewStylePropTypes'
 
@@ -35,14 +35,14 @@ export class KeyboardAwareScrollView extends React.Component {
 
   componentDidMount () {
     // Keyboard events
-    DeviceEventEmitter.addListener('keyboardWillShow', this.updateKeyboardSpace)
-    DeviceEventEmitter.addListener('keyboardWillHide', this.resetKeyboardSpace)
+    Keyboard.addListener('keyboardWillShow', this.updateKeyboardSpace);
+    Keyboard.addListener('keyboardWillHide', this.resetKeyboardSpace);
   }
 
   componentWillUnmount () {
     // TODO: figure out if removeAllListeners is the right thing to do
-    DeviceEventEmitter.removeAllListeners('keyboardWillShow')
-    DeviceEventEmitter.removeAllListeners('keyboardWillHide')
+    Keyboard.removeListener('keyboardWillShow', this.updateKeyboardSpace);
+    Keyboard.removeListeners('keyboardWillHide', this.resetKeyboardSpace);
   }
 
   /**
