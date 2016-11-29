@@ -35,14 +35,13 @@ export class KeyboardAwareScrollView extends React.Component {
 
   componentDidMount () {
     // Keyboard events
-    Keyboard.addListener('keyboardWillShow', this.updateKeyboardSpace);
-    Keyboard.addListener('keyboardWillHide', this.resetKeyboardSpace);
+    this.showSub = Keyboard.addListener('keyboardWillShow', this.updateKeyboardSpace);
+    this.hideSub = Keyboard.addListener('keyboardWillHide', this.resetKeyboardSpace);
   }
 
   componentWillUnmount () {
-    // TODO: figure out if removeAllListeners is the right thing to do
-    Keyboard.removeListener('keyboardWillShow', this.updateKeyboardSpace);
-    Keyboard.removeListeners('keyboardWillHide', this.resetKeyboardSpace);
+    this.showSub.remove();
+    this.hideSub.remove();
   }
 
   /**
