@@ -12,9 +12,17 @@ let { View, TextInput,
 export class Form extends React.Component{
   constructor(props){
     super();
-
+    const self = this;
     this.values = {};
-
+    React.Children.forEach(props.children, (child, i)=> {
+      if (!child) {
+        return;
+      }
+      const v = child.props.value || child.props.date;
+      if (child.ref && v) {
+        self.values[child.ref] = v;
+      }
+    });
   }
 
   handleFieldFocused(event, inputHandle){

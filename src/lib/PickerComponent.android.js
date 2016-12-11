@@ -54,7 +54,8 @@ var PickerItem = Picker.Item;
         //this._scrollToInput(event);
     }
     render(){
-
+      let ids = this.props.optionList || Object.keys(this.props.options);
+      
       return(<View><Field
         {...this.props}
         ref='inputBox'
@@ -70,7 +71,7 @@ var PickerItem = Picker.Item;
               selectedValue={this.state.value}
               onValueChange={this.handleValueChange.bind(this)}
               >
-              {Object.keys(this.props.options).map((value) => (
+              {ids.map((value) => (
                 <PickerItem
                   key={value}
                   value={value}

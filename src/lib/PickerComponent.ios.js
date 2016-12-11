@@ -89,13 +89,15 @@ export class PickerComponent extends React.Component{
       //     label={option.label}
       //   />);
       // });
+      let ids = this.props.optionList || Object.keys(this.props.options);
+
       let picker = <Picker ref='picker'
         {...this.props.pickerProps}
         selectedValue={this.state.value}
         onValueChange={this.handleValueChange.bind(this)}
         mode='dropdown'
         >
-        {Object.keys(this.props.options).map((value) => (
+        {ids.map((value) => (
           <PickerItem
             key={value}
             value={value}
